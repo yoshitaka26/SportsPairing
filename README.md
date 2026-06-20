@@ -49,14 +49,18 @@ print(match.summary)   // "Alice / Bob  vs  Carol / Dave"
 
 ```swift
 dependencies: [
-    .package(path: "../SportsPairing")          // ローカル参照の例
-    // または
-    // .package(url: "https://github.com/<you>/SportsPairing.git", from: "0.1.0")
+    // GitHub からバージョン固定で参照（推奨）
+    .package(url: "https://github.com/yoshitaka26/SportsPairing.git", from: "0.2.0")
+    // または、ライブラリ自体を改修しながら使う場合はローカル参照
+    // .package(path: "../SportsPairing")
 ],
 targets: [
     .target(name: "YourApp", dependencies: ["SportsPairing"])
 ]
 ```
+
+> 0.x 系は SPM の互換ルール上、`from: "0.2.0"` は `0.2.0 <= v < 0.3.0` を意味します
+> （マイナー上げ＝破壊的変更扱い）。`0.3.0` 以降へ上げるときは指定を明示的に更新してください。
 
 ```swift
 import SportsPairing
